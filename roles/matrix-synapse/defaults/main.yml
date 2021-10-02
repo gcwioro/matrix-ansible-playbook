@@ -1,7 +1,7 @@
-# Synapse is a Matrix homeserver
-# See: https://github.com/matrix-org/synapse
+# Synapse is a Matrix homeserver See: https://github.com/matrix-org/synapse
 
 matrix_synapse_enabled: true
+
 
 matrix_synapse_container_image_self_build: false
 matrix_synapse_container_image_self_build_repo: "https://github.com/matrix-org/synapse.git"
@@ -105,34 +105,34 @@ matrix_synapse_root_log_level: "WARNING"
 
 # Rate limits
 matrix_synapse_rc_message:
-  per_second: 0.2
+  per_second: 20
   burst_count: 10
 
 matrix_synapse_rc_registration:
-  per_second: 0.17
-  burst_count: 3
+  per_second: 4
+  burst_count: 30
 
 matrix_synapse_rc_login:
   address:
-    per_second: 0.17
-    burst_count: 3
+    per_second: 10
+    burst_count: 32
   account:
-    per_second: 0.17
-    burst_count: 3
+    per_second: 30
+    burst_count: 30
   failed_attempts:
-    per_second: 0.17
-    burst_count: 3
+    per_second: 3
+    burst_count: 30
 
 matrix_synapse_rc_admin_redaction:
-  per_second: 1
+  per_second: 5
   burst_count: 50
 
 matrix_synapse_rc_joins:
   local:
-    per_second: 0.1
+    per_second: 10
     burst_count: 3
   remote:
-    per_second: 0.01
+    per_second: 10
     burst_count: 3
 
 matrix_synapse_rc_federation:
@@ -611,3 +611,4 @@ matrix_synapse_configuration_extension: "{{ matrix_synapse_configuration_extensi
 # Holds the final Synapse configuration (a combination of the default and its extension).
 # You most likely don't need to touch this variable. Instead, see `matrix_synapse_configuration_yaml`.
 matrix_synapse_configuration: "{{ matrix_synapse_configuration_yaml|from_yaml|combine(matrix_synapse_configuration_extension, recursive=True) }}"
+
